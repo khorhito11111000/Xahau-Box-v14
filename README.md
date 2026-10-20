@@ -69,7 +69,7 @@ All on Xahau Testnet, with the HookHash above.
 - **Manual:** 49 tests in 94 steps, signed by hand in Xaman. 99 signed transactions and 13 payouts sent by the hook. All results matched the expectation.
 - **Automated:** 687 checks, 687 passed, 653 transactions on chain. This includes escape attempts, races and multi-sign.
 
-Details in [TESTS.md](TESTS.md).
+Details in [TESTS.md](TESTS.md). Full lists: [docs/TESTS_MANUAL.md](docs/TESTS_MANUAL.md) (all 49 tests and 94 steps) and [docs/TESTS_AUTOMATED.md](docs/TESTS_AUTOMATED.md) (all 687 checks).
 
 ## Limitations
 
@@ -101,6 +101,8 @@ docs/
   TRANSACTIONS.md  parameters and JSON examples
   SIGNING.md       how a key signature is made
   QR.md            QR ideas and formats
+  TESTS_MANUAL.md     all 49 manual tests and 94 steps, test accounts, token IDs
+  TESTS_AUTOMATED.md  all 687 automated checks by suite, test accounts
 ```
 
 The repo has no hook source, no wasm, no keys and no seeds.

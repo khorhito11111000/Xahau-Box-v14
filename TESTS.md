@@ -4,15 +4,19 @@ All tests ran on Xahau Testnet (NetworkID 21338) against HookHash `3CEEAB2F96E71
 
 There was no external audit.
 
+**Full lists:**
+- [docs/TESTS_MANUAL.md](docs/TESTS_MANUAL.md): test accounts, all 49 manual tests, all 94 steps, token IDs.
+- [docs/TESTS_AUTOMATED.md](docs/TESTS_AUTOMATED.md): all 687 automated checks, by suite, with the test accounts.
+
 ## Manual tests
 
 Date: 2026-10-17. Every transaction was signed by hand in Xaman, through xrplwin raw transactions.
 
 | Role | Address |
 |---|---|
-| A — creator, the hook is on this account | rNHBiY7RQhmAviL8cj56maSiHMyYPJvzW6 |
-| B — recipient 1 | rn3FvKwmgvwu4HtZt8RpGhSqiFiwQa9WoV |
-| C — recipient 2 | r9PyoseZW532HCvfwcdCRc1VKSzA5GKpRN |
+| A — creator, the hook is on this account | [rNHBiY7RQhmAviL8cj56maSiHMyYPJvzW6](https://test.xahauexplorer.com/account/rNHBiY7RQhmAviL8cj56maSiHMyYPJvzW6) |
+| B — recipient 1 | [rn3FvKwmgvwu4HtZt8RpGhSqiFiwQa9WoV](https://test.xahauexplorer.com/account/rn3FvKwmgvwu4HtZt8RpGhSqiFiwQa9WoV) |
+| C — recipient 2 | [r9PyoseZW532HCvfwcdCRc1VKSzA5GKpRN](https://test.xahauexplorer.com/account/r9PyoseZW532HCvfwcdCRc1VKSzA5GKpRN) |
 
 **49 tests in 94 steps.** Tests 1–31 are the earlier tests, run again on v14. Tests 32–49 are new in v14.
 
