@@ -51,3 +51,13 @@ The hook source is not published. You can check which hook is on an account only
 ## Keys and QR
 
 A bearer key or a bearer QR is a secret. Whoever has it opens the box first. Keeping keys, devices and QR images safe is the user's job.
+
+## What wallets and explorers can do
+
+Some of these limits can be made visible to users by wallets and explorers:
+
+- show a warning when the box account still has an active master key, a regular key or a signer list, so the hook can be removed;
+- show whether the account balance covers the XAH locked in all open boxes;
+- check before packing whether the recipient blocks incoming Remit or requires a destination tag;
+- show the box time limit, and whether the box has a key link or a key token;
+- check that the hook on the account matches the published HookHash.
