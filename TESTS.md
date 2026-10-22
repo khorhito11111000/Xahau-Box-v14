@@ -44,6 +44,7 @@ All results matched the expectation.
 9. **New v14 refusals (tests 35–42, 46–49).** The hook refuses: a token with an open sell offer, a burnable token in the box or as the key, a key that is not a URIToken, the key equal to the content, an unknown MODE, a time limit in the past, an empty box. Another account cannot PACK or OPEN on someone else's hook.
 10. **Old signature (test 41).** After the same key is packed again, the old signature does not work. The new one does.
 11. **Time limit (tests 10–12).** Before the limit A cannot take the box back. After it, B cannot open, and A takes the contents back.
+12. **More than 8 offers (test 50, steps 95–105, 2026-10-22).** A makes 10 DEX offers in a row. All pass. Offers 1–8 fill the hook's 8 slots, and offers 9–10 go to a separate counter of locked XAH (2000 drops). After offer 10 is cancelled, the counter stays at 2000 drops: past 8 commitments the hook only errs toward "still locked". Boxes are not affected. Full steps and tx links: [docs/TESTS_MANUAL.md](docs/TESTS_MANUAL.md#extra-test-50-more-than-8-offers-2026-10-22).
 
 ## Automated tests
 

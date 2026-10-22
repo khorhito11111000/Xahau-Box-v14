@@ -175,6 +175,32 @@ Who signs: A, B or C (see Accounts). All steps passed.
 | 93 | B | Invoke (CLAIM) | CLAIM box 6 after the time limit (B) | Rejected: tecHOOK_REJECTED, `tgs: expired` | 11 |
 | 94 | A | Invoke (OPEN) | OPEN box 6 after the time limit | Success: tesSUCCESS, `tgs: opened` | 12 |
 
+
+## Extra test 50: more than 8 offers (2026-10-22)
+
+Suggested by the reviewer before mainnet, because this path had not run on chain yet. Signed by hand in Xaman through xrplwin, same account A.
+
+**What it checks.** The hook remembers the last 8 XAH commitments of account A (DEX offers and Checks), so that the XAH they promise cannot come out of the boxes. From the 9th commitment on, the amount goes to a separate counter of locked XAH. That counter only grows. Cancelling or filling such an offer does not lower it. So past 8 commitments the hook only errs toward "still locked": boxes are never touched, and the owner just has a little less free XAH.
+
+| Step | Who | Type | What | Expected and result | Tx |
+|---|---|---|---|---|---|
+| 95 | A | OfferCreate | Offer 1: sell 0.001 XAH for 1000 USD (B), never fills.  | Success: tesSUCCESS, `tgs: out` | [8722311E…](https://test.xahauexplorer.com/explorer/8722311E683B276ED6B1976F070D1912C512BEA3BC59B6E89F1788EA334ACBFA) |
+| 96 | A | OfferCreate | Offer 2: sell 0.001 XAH for 1000 USD (B), never fills.  | Success: tesSUCCESS, `tgs: out` | [2580ABDF…](https://test.xahauexplorer.com/explorer/2580ABDF8A5E0AB1E5A9DAB0FABE305482B07DAF874341FFC4613E2946516BB7) |
+| 97 | A | OfferCreate | Offer 3: sell 0.001 XAH for 1000 USD (B), never fills.  | Success: tesSUCCESS, `tgs: out` | [4ECF94F2…](https://test.xahauexplorer.com/explorer/4ECF94F2C014E1609EBBEB86CDFD4DCA81A41E1FF6E4732988BCB10172ACE58E) |
+| 98 | A | OfferCreate | Offer 4: sell 0.001 XAH for 1000 USD (B), never fills.  | Success: tesSUCCESS, `tgs: out` | [377938D9…](https://test.xahauexplorer.com/explorer/377938D9E004593E8C076C6E5D112693B79B990CB019392B43EE4DF03ACFE6D3) |
+| 99 | A | OfferCreate | Offer 5: sell 0.001 XAH for 1000 USD (B), never fills.  | Success: tesSUCCESS, `tgs: out` | [B8DB0E4E…](https://test.xahauexplorer.com/explorer/B8DB0E4E67E9D5AD1BB80E70520F6693EE487D42D1710C445C002FAC6CD9344E) |
+| 100 | A | OfferCreate | Offer 6: sell 0.001 XAH for 1000 USD (B), never fills.  | Success: tesSUCCESS, `tgs: out` | [27FB0156…](https://test.xahauexplorer.com/explorer/27FB015626170155F6A5E704BFDB1D10D71D2ECFB5BBF3B5DE553BB6FE6A9BF8) |
+| 101 | A | OfferCreate | Offer 7: sell 0.001 XAH for 1000 USD (B), never fills.  | Success: tesSUCCESS, `tgs: out` | [F2279165…](https://test.xahauexplorer.com/explorer/F2279165132958E5CD969F3951375143189F85B4118ED370B584DCDB3AE1A8E3) |
+| 102 | A | OfferCreate | Offer 8: sell 0.001 XAH for 1000 USD (B), never fills. 8th offer: all 8 slots are now used | Success: tesSUCCESS, `tgs: out` | [0F2904BF…](https://test.xahauexplorer.com/explorer/0F2904BFB974ED6400AF500AB66C2CE7912B89E0A682CDD22832C653C4E5DDD6) |
+| 103 | A | OfferCreate | Offer 9: sell 0.001 XAH for 1000 USD (B), never fills. 9th offer: goes to the extra counter | Success: tesSUCCESS, `tgs: out` | [E12CE331…](https://test.xahauexplorer.com/explorer/E12CE331BCD81F632F578D08AD1CFD064AF48E403D842E36D58CC44710419114) |
+| 104 | A | OfferCreate | Offer 10: sell 0.001 XAH for 1000 USD (B), never fills. 10th offer: goes to the extra counter | Success: tesSUCCESS, `tgs: out` | [A98B746A…](https://test.xahauexplorer.com/explorer/A98B746A49F8752158CE3B5640E169F546760FE9CCBC8BE3EF80CCF1D69D315D) |
+| 105 | A | OfferCancel | Cancel offer 10 | Success: tesSUCCESS, `tgs: out` | [E2304EF6…](https://test.xahauexplorer.com/explorer/E2304EF670B770ED0594DA57C528A201B28802FFB9E895C9972FF9A8F5D8BA6F) |
+
+**Hook State after step 104:** the 8-slot record holds offers 1–8, and the extra counter holds 2000 drops (offers 9 and 10, 0.001 XAH each).
+**Hook State after step 105:** offer 10 is gone, the 8 slots are unchanged, and the extra counter still holds 2000 drops. As expected.
+
+**Result: 11 steps, 11 passed.** No box was affected. 9 offers were left open on the test account.
+
 ## Test tokens
 
 All tokens were minted by A in steps 1–12. URIToken IDs are public.
